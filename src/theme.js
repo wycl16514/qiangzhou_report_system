@@ -134,10 +134,28 @@ export const themeSettings = (mode) => {
                     light: colors.grey[100]
                 },
                 background: {
-
+                    default: colors.primary[500],
+                }
+            } : {
+                primary: {
+                    main: colors.primary[100]
+                },
+                secondary: {
+                    main: colors.greenAccent[100]
+                },
+                neutral: {
+                    dark: colors.gray[700],
+                    main: colors.grey[500],
+                    light: colors.grey[100]
+                },
+                background: {
+                    default: "#fcfcfc",
                 }
             }
             )
+        },
+        typography: {
+
         }
     }
 }
