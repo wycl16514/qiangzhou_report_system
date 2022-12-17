@@ -120,39 +120,40 @@ export const tokens = (mode) => ({
 export const themeSettings = (mode) => {
     const colors = tokens(mode)
     return {
-        palatte: {
+        palette: {
             mode: mode,
-            ...(mode === 'dark' ? {
-                primary: {
-                    main: colors.primary[500]
-                },
-                secondary: {
-                    main: colors.greenAccent[500]
-                },
-                neutral: {
-                    dark: colors.gray[700],
-                    main: colors.grey[500],
-                    light: colors.grey[100]
-                },
-                background: {
-                    default: colors.primary[500],
+            ...(mode === 'dark'
+                ? {
+                    primary: {
+                        main: colors.primary[500]
+                    },
+                    secondary: {
+                        main: colors.greenAccent[500]
+                    },
+                    neutral: {
+                        dark: colors.grey[700],
+                        main: colors.grey[500],
+                        light: colors.grey[100],
+                    },
+                    background: {
+                        default: colors.primary[500],
+                    },
+                } : {
+                    primary: {
+                        main: colors.primary[100]
+                    },
+                    secondary: {
+                        main: colors.greenAccent[500]
+                    },
+                    neutral: {
+                        dark: colors.grey[700],
+                        main: colors.grey[500],
+                        light: colors.grey[100]
+                    },
+                    background: {
+                        default: "#fcfcfc",
+                    }
                 }
-            } : {
-                primary: {
-                    main: colors.primary[100]
-                },
-                secondary: {
-                    main: colors.greenAccent[100]
-                },
-                neutral: {
-                    dark: colors.gray[700],
-                    main: colors.grey[500],
-                    light: colors.grey[100]
-                },
-                background: {
-                    default: "#fcfcfc",
-                }
-            }
             )
         },
         typography: {
@@ -187,7 +188,7 @@ export const themeSettings = (mode) => {
 };
 
 export const ColorModeContext = createContext({
-    toggleColorMode: () => { }
+    toggleColorMode: () => { },
 });
 
 export const useMode = () => {
@@ -195,14 +196,14 @@ export const useMode = () => {
 
     const colorMode = useMemo(
         () => ({
-            toggleColorMode: () => setMode((prev) => (prev === 'light' ? 'dark' : "light")),
+            toggleColorMode: () =>
+                setMode((prev) => (prev === "light" ? "dark" : "light")),
         }),
         []
     );
 
     const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
-
     return [theme, colorMode];
-}
+};
 
 
