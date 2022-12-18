@@ -2,7 +2,7 @@ import { ColorModeContext, useMode } from './theme'
 import { CssBaseline, ThemeProvider } from "@mui/material"
 import Topbar from './scenes/global/Topbar';
 import Dashboard from './scenes/dashboard'
-import Sidebar from './scenes/global/Sidebar'
+import QiangZhouSidebar from './scenes/global/Sidebar'
 import { Routes, Route } from 'react-router-dom'
 function App() {
   const [theme, colorMode] = useMode();
@@ -12,7 +12,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline></CssBaseline>
         <div className="app">
-          <Sidebar />
+          <QiangZhouSidebar />
           <main className='content'>
             <Topbar></Topbar>
             <Routes>
