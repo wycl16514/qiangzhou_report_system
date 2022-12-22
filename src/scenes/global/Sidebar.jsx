@@ -70,7 +70,7 @@ const QiangZhouSidebar = () => {
                                 ml="15px"
                             >
                                 <Typography variant="h3" color={colors.grey[100]}>
-                                    ADMINIS
+                                    管理面板
                                 </Typography>
                                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                                     <MenuOutlinedIcon />
@@ -103,70 +103,89 @@ const QiangZhouSidebar = () => {
                     }
                     {/* Menu items */}
                     <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-                        <Item title="Dashboard"
+                        <Item title="控制面板"
                             to="/"
                             icon={<HomeOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         ></Item>
+                        <Typography variant="h6" color={colors.grey[300]}
+                            sx={{ m: "15px 0 5px 20px" }}
+                        >人员信息</Typography>
 
-                        <Item title="Manage Team"
+                        <Item title="管理团队"
                             to="/"
                             icon={<PeopleOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         ></Item>
 
-                        <Item title="Contacts Information"
+                        <Item title="学员信息总览"
                             to="/contacts"
                             icon={<ContactOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         ></Item>
 
-                        <Item title="Invoices Balances"
+                        <Item title="缴费情况"
                             to="/invoice"
                             icon={<ReceiptOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         ></Item>
+                        <Typography variant="h6" color={colors.grey[300]}
+                            sx={{ m: "15px 0 5px 20px" }}>
+                            操作页面
+                        </Typography>
 
-                        <Item title="Profile Form"
+                        <Item title="学员信息设置"
                             to="/form"
                             icon={<PeopleOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         ></Item>
 
-                        <Item title="Calendar"
+                        <Item title="通知设置"
                             to="/calendar"
                             icon={<CalendarTodayOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         ></Item>
 
-                        <Item title="Bar chart"
+                        <Item title="学员疑问"
+                            to="/faq"
+                            icon={<HelpOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        ></Item>
+
+                        <Typography variant="h6" color={colors.grey[300]}
+                            sx={{ m: "15px 0 5px 20px" }}>
+                            数据图表
+                        </Typography>
+
+                        <Item title="柱状图"
                             to="/bar"
                             icon={<BarChartOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         ></Item>
 
-                        <Item title="Pie Chart"
+                        <Item title="饼图"
                             to="/pie"
                             icon={<PieChartOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         ></Item>
 
-                        <Item title="Line Chart"
+                        <Item title="线状图"
                             to="/line"
                             icon={<TimelineOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         ></Item>
 
-                        <Item title="Geography Chart"
+                        <Item title="区域分布图"
                             to="/geo"
                             icon={<MapOutlinedIcon />}
                             selected={selected}
