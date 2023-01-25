@@ -1,0 +1,27 @@
+GET http://localhost:3001/api/v1/manageteam
+Authorization: Bearer ""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY2hlbnlpIiwiaWF0IjoxNjc0NjU2ODQyLCJleHAiOjE2NzQ2NTY4NTd9.uxHTgAYCi_hr1U1qZPW0qWt7DwTAI7vtkfdQu-Ih2Yw
+
+###
+POST http://localhost:3001/api/v1/logout
+Content-Type: application/json 
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY2hlbnlpIiwiaWF0IjoxNjc0NjU3MjIzfQ.iFA3vPl7JSZoen4C4fknGZVgJcNyD1AGvFZ8x8tK3PM"
+}
+
+###
+POST http://localhost:3001/api/v1/token 
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiY2hlbnlpIiwiaWF0IjoxNjc0NjU2ODQyfQ.TzeBunk8Rz5BDJCaXf8O-_L-OZ2vqR1l7Arn4KWYDP4"
+}
+
+###
+
+POST http://localhost:3001/api/v1/login 
+Content-Type: application/json
+
+{
+    "userName": "chenyi"
+}

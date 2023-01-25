@@ -21,4 +21,10 @@ module.exports = function (app, config) {
         var routes = require(controller)
         app.use('/api/v1', routes)
     })
+
+    var auth = glob.sync(config.root + '/auth/*.js')
+    auth.forEach((auth) => {
+        var routes = require(auth)
+        app.use('/api/v1', routes)
+    })
 }
