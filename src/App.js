@@ -5,6 +5,7 @@ import Dashboard from './scenes/dashboard'
 import QiangZhouSidebar from './scenes/global/Sidebar'
 import { Routes, Route } from 'react-router-dom'
 import Team from "./scenes/team"
+import Login from "./scenes/login/login"
 function App() {
   const [theme, colorMode] = useMode();
 
@@ -17,7 +18,8 @@ function App() {
           <main className='content'>
             <Topbar></Topbar>
             <Routes>
-              <Route path="/" element={<Dashboard />}></Route>
+              <Route path="/" element={<Login />}></Route>
+              <Route path="/dashboard" element={<Dashboard />}></Route>
               <Route path="/team" element={<Team />}></Route>
             </Routes>
           </main>
