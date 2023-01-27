@@ -28,8 +28,8 @@ router.post('/logout', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     //auth user
-    const userName = req.body.userName
-    const user = { name: userName }
+    const phone = req.body.phone
+    const user = { name: phone }
     const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.TOKEN_EXPIRES })
     const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
     refreshTokens.push(refreshToken)
