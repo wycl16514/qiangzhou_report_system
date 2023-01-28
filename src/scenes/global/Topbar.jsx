@@ -12,7 +12,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import LoginService from "../../services/loginServices"
 
 const notifyLogin = (loginInfo) => {
-    Topbar.setDisplay('block')
+    Topbar.setDisplay('flex')
 }
 
 
@@ -20,7 +20,7 @@ const Topbar = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const colorMode = useContext(ColorModeContext)
-    const [display, setDisplay] = useState('none')
+    const [display, setDisplay] = useState('bloc')
     Topbar.setDisplay = setDisplay
     const style = { display: display }
     useEffect(() => {
