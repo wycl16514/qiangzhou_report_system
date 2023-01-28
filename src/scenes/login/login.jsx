@@ -1,34 +1,10 @@
-import { React, useRef } from 'react'
+import { React, useRef, useState } from 'react'
 import { Grid, Paper, TextField, Button } from "@material-ui/core"
 import { Avatar } from '@mui/material'
 import LockOpenOutlined from '@mui/icons-material/LockOpenOutlined'
 import { sha256 } from 'js-sha256'
 import axios from 'axios'
-const userLogin = async (phone, password) => {
-    console.log('phone: ', phone)
-    console.log('password111: ', password)
-    const config = {
-        method: 'post',
-        url: process.env.REACT_APP_LOGIN_URL,
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-        },
-        data: {
-            phone,
-            passwordHash: sha256(password)
-        }
-    }
-    try {
-        const result = await axios(config)
-
-
-        console.log(result)
-    } catch (e) {
-        console.log('post err: ', e)
-    }
-
-
-}
+import LoginService from "../../services/loginServices"
 
 const Login = () => {
     const paperStyle = { padding: 20, height: '70vh', width: 280, margin: '2em auto' }
@@ -36,9 +12,11 @@ const Login = () => {
     const buttonStyle = { marginTop: '2em' }
     const phoneValueRef = useRef('')
     const passwordRef = useRef('')
-    console.log('passwordref: ', passwordRef)
+    const [display, setDisplay] = useState('block')
+    const style = { display: display }
+    Login.setDisplay = setDisplay
     return (
-        <Grid>
+        <Grid style={style}>
             <Paper elevation={10} style={paperStyle}>
                 <Grid align="center">
                     <Avatar style={avatarStyle}><LockOpenOutlined /></Avatar>
@@ -60,6 +38,37 @@ const Login = () => {
             </Paper>
         </Grid >
     )
+}
+
+const userLogin = async (phone, password) => {
+    const loginServiceInstance = LoginService.getInstance()
+
+    const config = {
+        method: 'post',
+        url: process.env.REACT_APP_LOGIN_URL,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+        },
+        data: {
+            phone,
+            passwordHash: sha256(password)
+        }
+    }
+    try {
+        const result = await axios(config)
+        if (result.status === 200) {
+            loginServiceInstance.setLoginInfo(result.data)
+            console.log('login obj: ', Login)
+            console.log('login this: ', this)
+            Login.setDisplay('none')
+        }
+
+        console.log(result)
+    } catch (e) {
+        console.log('post err: ', e)
+    }
+
+
 }
 
 export default Login;

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { Box, IconButton, useTheme } from '@mui/material'
 import { useContext } from 'react';
 import { ColorModeContext, tokens } from '../../theme';
@@ -8,13 +9,26 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from '@mui/icons-material/Search'
+import LoginService from "../../services/loginServices"
+
+const notifyLogin = (loginInfo) => {
+    Topbar.setDisplay('block')
+}
+
 
 const Topbar = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const colorMode = useContext(ColorModeContext)
+    const [display, setDisplay] = useState('none')
+    Topbar.setDisplay = setDisplay
+    const style = { display: display }
+    useEffect(() => {
+        const loginService = LoginService.getInstance()
+        loginService.addLoginObserver(Topbar)
+    }, []);
 
-    return (<Box display="flex" justifyContent="space-between" p={2}>
+    return (<Box style={style} display="flex" justifyContent="space-between" p={2}>
         <Box display="flex"
             background={colors.primary[400]}
             borderRadius="3px">
@@ -47,5 +61,7 @@ const Topbar = () => {
         </Box>
     </Box>)
 }
+
+Topbar.notifyLogin = notifyLogin
 
 export default Topbar;
