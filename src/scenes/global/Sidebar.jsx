@@ -20,6 +20,8 @@ import LoginService from "../../services/loginServices"
 
 const notifyLogin = (loginInfo) => {
     console.log("sizebar receive loginInfo: ", loginInfo)
+    QiangZhouSidebar.setUserName(loginInfo.teamMember.name)
+    QiangZhouSidebar.setUserRole(loginInfo.teamMember.access_level === 'admin' ? "管理员" : "校长")
     QiangZhouSidebar.setDisplay('block')
 }
 
@@ -42,6 +44,10 @@ const QiangZhouSidebar = () => {
     const [isCollapsed, setIsCollapsed] = useState(false)
     const [display, setDisplay] = useState('none')
     QiangZhouSidebar.setDisplay = setDisplay
+    const [userName, setUserName] = useState("")
+    const [userRole, setUserRole] = useState("管理员")
+    QiangZhouSidebar.setUserName = setUserName
+    QiangZhouSidebar.setUserRole = setUserRole
     const style = { display: display }
     const [selected, setSelected] = useState("Dashboard")
 
@@ -111,8 +117,8 @@ const QiangZhouSidebar = () => {
                                     <Typography
                                         variant="h2"
                                         color={colors.grey[100]}
-                                        fontWeight="bold" sx={{ m: "10px 0 0 0" }}>小何</Typography>
-                                    <Typography variant="h5" color={colors.greenAccent[500]}>管理员</Typography>
+                                        fontWeight="bold" sx={{ m: "10px 0 0 0" }}>{userName}</Typography>
+                                    <Typography variant="h5" color={colors.greenAccent[500]}>{userRole}</Typography>
                                 </Box>
                             </Box>
                         )
@@ -120,7 +126,7 @@ const QiangZhouSidebar = () => {
                     {/* Menu items */}
                     <Box paddingLeft={isCollapsed ? undefined : "10%"}>
                         <Item title="控制面板"
-                            to="/"
+                            to="/dashboard"
                             icon={<HomeOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}

@@ -5,6 +5,7 @@ import LockOpenOutlined from '@mui/icons-material/LockOpenOutlined'
 import { sha256 } from 'js-sha256'
 import axios from 'axios'
 import LoginService from "../../services/loginServices"
+import { red } from '@mui/material/colors'
 
 const Login = () => {
     const paperStyle = { padding: 20, height: '70vh', width: 280, margin: '2em auto' }
@@ -13,8 +14,11 @@ const Login = () => {
     const phoneValueRef = useRef('')
     const passwordRef = useRef('')
     const [display, setDisplay] = useState('block')
+    const [showErr, setShowErr] = useState('none')
     const style = { display: display }
+    const errStyle = { display: showErr, color: 'red' }
     Login.setDisplay = setDisplay
+    Login.setShowErr = setShowErr
     return (
         <Grid style={style}>
             <Paper elevation={10} style={paperStyle}>
@@ -28,6 +32,7 @@ const Login = () => {
                     fullWidth required
                     inputRef={passwordRef}
                 ></TextField>
+                <h3 style={errStyle}>登陆错误，请确认密码是否正确或者联系管理员</h3>
                 <Button style={buttonStyle}
                     type="submit" color="primary"
                     fullWidth variant="contained"
@@ -42,7 +47,7 @@ const Login = () => {
 
 const userLogin = async (phone, password) => {
     const loginServiceInstance = LoginService.getInstance()
-
+    Login.setShowErr('none')
     const config = {
         method: 'post',
         url: process.env.REACT_APP_LOGIN_URL,
@@ -56,15 +61,18 @@ const userLogin = async (phone, password) => {
     }
     try {
         const result = await axios(config)
+        console.log('login result: ', result)
         if (result.status === 200) {
             loginServiceInstance.setLoginInfo(result.data)
-            console.log('login obj: ', Login)
-            console.log('login this: ', this)
             Login.setDisplay('none')
+        } else {
+            console.log('login err: ', result.status)
+            Login.setShowErr('block')
         }
 
         console.log(result)
     } catch (e) {
+        Login.setShowErr('block')
         console.log('post err: ', e)
     }
 

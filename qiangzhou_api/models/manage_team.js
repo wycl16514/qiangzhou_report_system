@@ -13,5 +13,5 @@ var schema = new Schema(
     }
 )
 
-const User = mongoose.model('User', schema);
-module.exports = User;
+const ManageTeam = mongoose.model('manage_teams', schema);
+module.exports = ManageTeam;
