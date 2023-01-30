@@ -5,7 +5,7 @@ import LockOpenOutlined from '@mui/icons-material/LockOpenOutlined'
 import { sha256 } from 'js-sha256'
 import axios from 'axios'
 import LoginService from "../../services/loginServices"
-import { red } from '@mui/material/colors'
+
 
 const Login = () => {
     const paperStyle = { padding: 20, height: '70vh', width: 280, margin: '2em auto' }
@@ -61,19 +61,16 @@ const userLogin = async (phone, password) => {
     }
     try {
         const result = await axios(config)
-        console.log('login result: ', result)
         if (result.status === 200) {
             loginServiceInstance.setLoginInfo(result.data)
             Login.setDisplay('none')
         } else {
-            console.log('login err: ', result.status)
             Login.setShowErr('block')
         }
 
         console.log(result)
     } catch (e) {
         Login.setShowErr('block')
-        console.log('post err: ', e)
     }
 
 

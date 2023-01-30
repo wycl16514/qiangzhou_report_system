@@ -6,6 +6,40 @@ import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettin
 import LockOpenSettingsOutlinedIcon from "@mui/icons-material/LockOpenOutlined"
 import SecuritySettingsOutlinedIcon from "@mui/icons-material/SecurityOutlined"
 import Header from "../../components/header"
+import axios from 'axios'
+import LoginService from "../../services/loginServices"
+
+const getTeamData = async () => {
+    const teamData = { error: 0, data: null }
+    const loginInfo = LoginService.getInstance().getLoginInfo()
+    if (loginInfo === null) {
+        console.log('get team data err, no login info')
+        teamData['error'] = LoginService.ERR_NO_LOGIN_INFO
+        return teamData
+    }
+
+    const config = {
+        method: 'get',
+        url: process.env.REACT_APP_TEAM_DATA_URL,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'authorization': loginInfo.accessToken
+        },
+        data: {
+            phone: loginInfo.phone
+        }
+    }
+
+    const result = await axios(config)
+    if (result.status === 403) {
+        console.log('get team data err, token invalid')
+        teamData['error'] = LoginService.ERR_LOGIN_TOKEN_INVALID
+        return teamData
+    }
+
+    teamData['data'] = result.data.teamData
+    return teamData
+}
 
 const Team = () => {
     const theme = useTheme()
@@ -14,19 +48,19 @@ const Team = () => {
         field: "id", headerName: "ID"
     },
     {
-        field: "name", headerName: "Name", flex: 1, cellClassName: "name-column--cell"
+        field: "name", headerName: "姓名", flex: 1, cellClassName: "name-column--cell"
     },
     {
-        field: "age", headerName: "Age", type: "number", headerAlign: "left", align: "left"
+        field: "age", headerName: "年龄", type: "number", headerAlign: "left", align: "left"
     },
     {
-        field: "phone", headerName: "Phone Number", flex: 1,
+        field: "phone", headerName: "电话", flex: 1,
     },
     {
-        field: "email", headerName: "Email", flex: 1,
+        field: "email", headerName: "邮件", flex: 1,
     },
     {
-        field: "access", headerName: "Access Level", flex: 1, renderCell: ({ row: { access } }) => {
+        field: "access", headerName: "接入权限", flex: 1, renderCell: ({ row: { access } }) => {
             return (
                 <Box width="60%"
                     m="0 auto"

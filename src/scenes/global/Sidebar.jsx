@@ -136,7 +136,7 @@ const QiangZhouSidebar = () => {
                         >人员信息</Typography>
 
                         <Item title="管理团队"
-                            to="/"
+                            to="/team"
                             icon={<PeopleOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}

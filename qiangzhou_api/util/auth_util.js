@@ -8,6 +8,8 @@ exports.authenticateToken = async (req, res, next) => {
         return res.sendStatus(401)
     }
 
+    //find access token from cache by phone
+
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
         if (err) {
             console.log('auth err: ', err)
