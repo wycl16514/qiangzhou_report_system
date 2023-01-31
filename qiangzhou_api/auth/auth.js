@@ -1,7 +1,7 @@
 const ManageTeam = require('../models/manage_team')
 const express = require('express')
 const router = express.Router();
-
+const NodeCache = require("global-cache");
 const jwt = require('jsonwebtoken')
 let refreshTokens = []
 router.post('/token', async (req, res) => {
@@ -43,7 +43,9 @@ router.post('/login', async (req, res) => {
     const refreshToken = jwt.sign({ phone: teamMembers[0].phone_number, name: teamMembers[0].name }, process.env.REFRESH_TOKEN_SECRET)
     refreshTokens.push(refreshToken)
 
-    res.json({ teamMember, accessToken, refreshToken })
+    const authObj = { teamMember, accessToken, refreshToken }
+    NodeCache.set(phone, authObj)
+    res.json(authObj)
 })
 
 

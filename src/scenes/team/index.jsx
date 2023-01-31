@@ -8,10 +8,13 @@ import SecuritySettingsOutlinedIcon from "@mui/icons-material/SecurityOutlined"
 import Header from "../../components/header"
 import axios from 'axios'
 import LoginService from "../../services/loginServices"
+import { useState, useEffect } from 'react'
 
 const getTeamData = async () => {
     const teamData = { error: 0, data: null }
+
     const loginInfo = LoginService.getInstance().getLoginInfo()
+    console.log("team view login info: ", loginInfo)
     if (loginInfo === null) {
         console.log('get team data err, no login info')
         teamData['error'] = LoginService.ERR_NO_LOGIN_INFO
@@ -19,31 +22,45 @@ const getTeamData = async () => {
     }
 
     const config = {
-        method: 'get',
+        method: 'post',
         url: process.env.REACT_APP_TEAM_DATA_URL,
         headers: {
             'Access-Control-Allow-Origin': '*',
             'authorization': loginInfo.accessToken
         },
         data: {
-            phone: loginInfo.phone
+            phone: loginInfo.teamMember.phone_number,
         }
     }
 
-    const result = await axios(config)
-    if (result.status === 403) {
-        console.log('get team data err, token invalid')
-        teamData['error'] = LoginService.ERR_LOGIN_TOKEN_INVALID
-        return teamData
+    console.log("team manage url: ", process.env.REACT_APP_TEAM_DATA_URL)
+    try {
+        const result = await axios(config)
+        if (result.status === 403) {
+            console.log('get team data err, token invalid')
+            teamData['error'] = LoginService.ERR_LOGIN_TOKEN_INVALID
+            return teamData
+        }
+
+        teamData['data'] = result.data.teamData
+    } catch (e) {
+        console.log("axio err: ", e)
     }
 
-    teamData['data'] = result.data.teamData
     return teamData
 }
 
 const Team = () => {
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
+    useEffect(() => {
+        async function fetchData() {
+            const teamData = await getTeamData()
+            console.log('getting team data: ', teamData)
+        }
+        fetchData()
+    }, []);
+
     const columns = [{
         field: "id", headerName: "ID"
     },
