@@ -53,10 +53,26 @@ const getTeamData = async () => {
 const Team = () => {
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
+    const [teamData, setTeamData] = useState(mockDataTeam)
     useEffect(() => {
         async function fetchData() {
-            const teamData = await getTeamData()
-            console.log('getting team data: ', teamData)
+            const teamDataReceived = await getTeamData()
+            console.log('getting team data: ', teamDataReceived)
+            const teamData = []
+            let count = 1
+            for (const data of teamDataReceived.data) {
+                teamData.push({
+                    id: count,
+                    name: data.name,
+                    email: data.email,
+                    age: data.age,
+                    phone: data.phone_number,
+                    access: data.access_level,
+                })
+                count += 1
+            }
+
+            setTeamData(teamData)
         }
         fetchData()
     }, []);
@@ -125,7 +141,7 @@ const Team = () => {
                     backgroundColor: colors.bluecAccent[700]
                 }
             }}>
-                <DataGrid rows={mockDataTeam} columns={columns}>
+                <DataGrid rows={teamData} columns={columns}>
 
                 </DataGrid>
             </Box>
