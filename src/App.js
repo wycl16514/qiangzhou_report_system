@@ -6,6 +6,8 @@ import QiangZhouSidebar from './scenes/global/Sidebar'
 import { Routes, Route } from 'react-router-dom'
 import Team from "./scenes/team"
 import Login from "./scenes/login/login"
+import Contacts from "./scenes/contacts"
+
 function App() {
   const [theme, colorMode] = useMode();
 
@@ -21,6 +23,7 @@ function App() {
               <Route path="/" element={<Login />}></Route>
               <Route path="/dashboard" element={<Dashboard />}></Route>
               <Route path="/team" element={<Team />}></Route>
+              <Route path="/contacts" element={<Contacts />}></Route>
             </Routes>
           </main>
         </div>
