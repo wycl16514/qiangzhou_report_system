@@ -1,4 +1,4 @@
-import { Box, } from "@mui/material"
+import { Box, Tooltip } from "@mui/material"
 import { DataGrid, GridToolbar } from "@mui/x-data-grid"
 import { tokens } from "../../theme"
 import { mockDataContacts } from "../../data/mockData"
@@ -53,34 +53,80 @@ const Contacts = () => {
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
 
-    const columns = [{
-        field: "id", headerName: "ID"
-    },
-    { filed: "registrarId", headerName: "Registrar ID" },
-    {
-        field: "name", headerName: "姓名", flex: 1, cellClassName: "name-column--cell"
-    },
-    {
-        field: "age", headerName: "年龄", type: "number", headerAlign: "left", align: "left"
-    },
-    {
-        field: "phone", headerName: "电话", flex: 1,
-    },
-    {
-        field: "email", headerName: "邮件", flex: 1,
-    },
-    {
-        field: "address", headerName: "地址", flex: 1,
-    },
-    {
-        field: "city", headerName: "县市", flex: 1,
-    },
-    {
-        field: "zipCode", headerName: "邮政编码", flex: 1,
-    },
+    const columns = [
+        { field: "id", headerName: "ID", flex: 0.5 },
+        {
+            field: "name",
+            headerName: "Name",
+            flex: 1,
+            cellClassName: "name-column--cell",
+        },
+        {
+            field: "age",
+            headerName: "Age",
+            type: "number",
+            headerAlign: "left",
+            align: "left",
+        },
+        {
+            field: "nationality",
+            headerName: "民族",
+            flex: 0.2,
+        },
+        {
+            field: "idCard",
+            headerName: "身份证号",
+            flex: 2,
+        },
+        {
+            field: "address",
+            headerName: "地址",
+            flex: 2,
+            renderCell: (params: any) => (
+                <Tooltip title={params.value} >
+                    <span>{params.value}</span>
+                </Tooltip>
+            ),
+        },
+        {
+            field: "education",
+            headerName: "文化程度",
+            flex: 0.5,
+        },
+        {
+            field: "phone",
+            headerName: "电话",
+            flex: 2,
+        },
+        {
+            field: "workPlace",
+            headerName: "工作单位",
+            flex: 2,
+        },
+        {
+            field: "quality",
+            headerName: "资格类型",
+            flex: 1,
+        },
+
+        {
+            field: "workClass",
+            headerName: "作业类别",
+            flex: 1,
+        },
+        {
+            field: "project",
+            headerName: "操作项目",
+            flex: 1,
+        },
+        {
+            field: "trainning",
+            headerName: "培训类型",
+            flex: 0.5,
+        },
     ]
     return (
-        <Box>
+        <Box m="20px">
             <Header title="学员信息" subtitle="学员信息列表显示"></Header>
             <Box m="40px 0 0 0" height="75vh" sx={{
                 "& .MuiDataGrid-root": {
