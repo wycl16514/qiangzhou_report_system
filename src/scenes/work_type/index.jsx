@@ -28,7 +28,7 @@ class WorkTypeSetting extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <Grid container wrap='nowrap' alignItems="center" justify="center" direction="row">
+                <Grid p={2} container wrap='nowrap' alignItems="center" justify="center" direction="row">
                     <Grid item>
                         <TextField
                             required
