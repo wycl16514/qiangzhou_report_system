@@ -7,6 +7,7 @@ import { Routes, Route } from 'react-router-dom'
 import Team from "./scenes/team"
 import Login from "./scenes/login/login"
 import Contacts from "./scenes/contacts"
+import WorkType from "./scenes/work_type"
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -24,6 +25,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />}></Route>
               <Route path="/team" element={<Team />}></Route>
               <Route path="/contacts" element={<Contacts />}></Route>
+              <Route path="/work_type" element={<WorkType />}></Route>
             </Routes>
           </main>
         </div>

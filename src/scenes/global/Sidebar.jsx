@@ -16,7 +16,7 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import LoginService from "../../services/loginServices"
-
+import EngineeringIcon from '@mui/icons-material/Engineering';
 
 const notifyLogin = (loginInfo) => {
     console.log("sizebar receive loginInfo: ", loginInfo)
@@ -163,6 +163,13 @@ const QiangZhouSidebar = () => {
                         <Item title="学员信息设置"
                             to="/form"
                             icon={<PeopleOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        ></Item>
+
+                        <Item title="工种设置设置"
+                            to="/work_type"
+                            icon={<EngineeringIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         ></Item>
