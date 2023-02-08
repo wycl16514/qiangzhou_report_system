@@ -24,3 +24,13 @@ POST http://localhost:3001/api/v1/login
 {
     "userName": "chenyi"
 }
+
+###
+POST http://localhost:3001/api/v1/addWorkType
+Content-Type: application/json
+
+{
+    "kind": "电工作业",
+    "projects": "低压电工,高压电工",
+    "types":"初训,复训"
+}
