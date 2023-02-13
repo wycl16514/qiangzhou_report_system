@@ -23,4 +23,11 @@ router.post('/addWorkType', async (req, res) => {
     }
 })
 
+router.get('/getWorkType', async (req, res) => {
+    const workTypeRecords = await WorkType.find({})
+    res.status(200).send(workTypeRecords)
+})
+
+
+
 module.exports = router;
