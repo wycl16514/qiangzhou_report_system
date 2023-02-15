@@ -4,6 +4,7 @@ import {
     FormLabel,
     RadioGroup,
     Radio,
+    InputLabel,
     FormControlLabel,
     TextField,
     MenuItem,
@@ -91,7 +92,7 @@ class WorkTypeSetting extends React.Component {
                                 variant="filled"
                             />
                         </Grid>
-                        <Grid ite style={{ marginLeft: "1rem" }}>
+                        <Grid item style={{ marginLeft: "1rem" }}>
                             <FormGroup>
                                 <FormControlLabel control={<Checkbox name="firstTrainning" />} label="初训" />
                                 <FormControlLabel control={<Checkbox name="secondTrainning" />} label="复训" />
@@ -110,23 +111,41 @@ class WorkTypeSetting extends React.Component {
                     </Grid >
                 </form >
 
-                <Grid>
-                    {
-                        this.state.currentWorkTypes.map(function (record, i) {
-                            return (
-                                <Grid item key={i}>
+                {
+                    this.state.currentWorkTypes.map(function (record, i) {
+                        console.log("record projects:", record.projects.split(','))
+                        return (
+                            <Grid p={2} container wrap='nowrap' alignItems="center" justify="center" direction="row">
+                                <Grid item >
                                     <TextField label="作业类别"
                                         defaultValue={record.kind}
                                         InputProps={{
                                             readOnly: true,
                                         }}
                                     />
-
                                 </Grid>
-                            )
-                        })
-                    }
-                </Grid>
+                                <Grid item style={{ marginLeft: "1rem" }}>
+                                    <FormGroup >
+                                        {record.projects.split(',').map(function (project, i) {
+                                            return (
+                                                <FormControlLabel disabled control={<Checkbox defaultChecked />} label={project} />
+                                            )
+                                        })}
+                                    </FormGroup>
+                                </Grid>
+                                <Grid item style={{ marginLeft: "1rem" }}>
+                                    <FormGroup >
+                                        {record.types.split(',').map(function (type, i) {
+                                            return (
+                                                <FormControlLabel disabled control={<Checkbox defaultChecked />} label={type} />
+                                            )
+                                        })}
+                                    </FormGroup>
+                                </Grid>
+                            </Grid>
+                        )
+                    })
+                }
 
             </div>
         )
